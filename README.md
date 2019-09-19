@@ -3,18 +3,19 @@
 
 ## Main page
 ----
-- [ ] A field to the user insert the GibHub user/login.
-- [ ] A button to trigger a Request to the API and select data to be renderer into the List component.
-- [ ] Each list component should have, name, login, bio, avatar and a button for more details and access the second route.
+- [x] A field to the user insert the GibHub user/login.
+- [x] A button to trigger a Request to the API and select data to be renderer into the List component.
+- [x] Each list component should have, name, login, bio, avatar and a button for more details and access the second route.
 
 ## User page
-- [ ] Navigation header should inform 'user login'
-- [ ] Header - User avatar / user name / user bio
-- [ ] Render a list with all user starred repositories (repo title/ owner name/ owner avatar)
+- [x] Navigation header should inform 'user login'
+- [x] Header - User avatar / user name / user bio
+- [x] Render a list with all user starred repositories (repo title/ owner name/ owner avatar)
 ---
 
+
 ## Libraries
-> react-native (community CLI)
+> "[react-native-CLI].(https://github.com/react-native-community/cli)"
 
 > react-native-navigation
 
@@ -51,38 +52,65 @@
 > VScode
 
 > Reactotron
- packeage*
 
-> react-native-navigation
 
-> react-navigation-stack
+# Desafio 06. Aplicação com React Native
 
-> react-native-gesture-handler
+Nesse desafio você adicionará novas funcionalidades na aplicação que desenvolvemos ao longo desse módulo.
 
-> react-native-reanimated
+## Funcionalidades
 
-> react-native-vector-icons - responsive icons
+### Loading de repositórios
 
-> styled-components - define comps style using CSS
+Adicione um indicator de loading utilizando `<ActivityIndicator />` antes de carregar a lista de repositórios favoritados na tela de detalhes do Usuário.
 
-> reactotron-react-native - DebugCode
+### Scroll infinito
 
-> axios - API Requests
+Adicione uma funcionalidade de scroll infinito na lista de repositórios favoritados. Assim que o usuário chegar nos **20%** do final de lista, busque pelos items na próxima página e adicione na lista. Seu código ficará da seguinte forma:
 
-### Code STD
-> Eslist (AIRBNB)
+```js
+<Stars
+  onEndReachedThreshold={0.2} // Carrega mais itens quando chegar em 20% do fim
+  onEndReached={this.loadMore} // Função que carrega mais itens
+  // Restante das props
+>
+```
 
->Prettier
+Para requisitar uma nova página no Github utilize um parâmetro `page` no fim da URL:
 
->EditorConfig
+```
+https://api.github.com/users/diego3g/starred?page=2
+```
 
-## Tool apps
-### Emulation
->Genymotions
+### Pull to Refresh
 
->USB Android
+Adicione uma funcionalidade para quando o usuário arrastar a listagem de repositórios favoritados pra baixo atualize a lista resetando o estado, ou seja, volte o estado da paginação para a página 1 exibindo apenas os 30 primeiros itens.
 
-### Code/ Debug
-> VScode
+A funcionalidade "Pull to Refresh" existe por padrão na FlatList e pode ser implementada através do seguinte código:
 
-> Reactotron
+```js
+<Stars
+  onRefresh={this.refreshList} // Função dispara quando o usuário arrasta a lista pra baixo
+  refreshing={this.state.refreshing} // Variável que armazena um estado true/false que representa se a lista está atualizando
+  // Restante das props
+>
+```
+
+### WebView
+
+Crie uma nova página na aplicação que vai ser acessada quando o usuário clicar em um repositório favoritado, essa página deve conter apenas o Header da aplicação. O conteúdo da página será uma WebView, ou seja, um browser integrado que exibe o atributo `html_url` presente no objeto do repositório que vem da API do Github.
+
+Documentação de utilização da WebView: https://github.com/react-native-community/react-native-webview/blob/master/docs/Getting-Started.md
+
+Exemplo de código:
+
+```js
+<WebView
+  source={{ uri: repository.html_url }}
+  style={{ flex: 1 }}
+/>
+```
+
+Resultado:
+
+![WebView](assets-desafio/exemplo-web-view.png)

@@ -30,6 +30,16 @@ export const UserBio = styled.Text`
   margin-top: 5px;
   text-align: center;
 `;
+export const Loading = styled.ActivityIndicator.attrs({
+  color: '#7159c1',
+  size: 60,
+})`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
 export const StarsList = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
 })`
