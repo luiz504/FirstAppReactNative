@@ -4,13 +4,13 @@
 * Click on 'VIEW PROFILE' to open a new page with all 'user' starred repositories.
 * Click over any listed repository to open Its GitHub webpage.
 
-
-## Main page
 ----
+## Main page
+---
 - [x] A field to insert the GitHub user's login.
 - [x] A button to trigger an API Request and insert user's info into the List.
 - [x] Each list component should have, name, login, bio, avatar and a button for more details and access the second route.
-
+--
 ## User page
 - [x] Navigation header should inform 'user login'.
 - [x] Header - User avatar / user name / user bio.
@@ -18,14 +18,14 @@
 - [x] Infinity load page (30 items per page default).
 - [x] Pull to refresh the list.
 - [x] Click over the repository item to access Its Github Repository page.
----
+--
 ## Repository page
 - [x] Navigation header should inform 'Repository name'.
 - [x] Load the GitHub repository page into the app.
-
+----
 
 ## Libraries
-> "[react-native-CLI].(https://github.com/react-native-community/cli)"
+> react-native-CLI (https://github.com/react-native-community/cli)
 
 > react-native-navigation
 
