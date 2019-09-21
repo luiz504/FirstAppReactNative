@@ -50,6 +50,13 @@ export const UserAvatar = styled.Image`
   border-radius: 32px;
   background: #eee;
 `;
+export const DeleteUserButton = styled(RectButton)`
+  align-self: flex-end;
+  border-radius: 10px;
+
+  justify-content: center;
+  align-items: center;
+`;
 
 export const UserName = styled.Text`
   font-size: 14px;
