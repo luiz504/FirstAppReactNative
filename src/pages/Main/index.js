@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Keyboard, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import api from '../../services/api';
 
 import {
@@ -17,6 +18,7 @@ import {
   UserBio,
   ProfileButton,
   ProfileButtonText,
+  DeleteUserButton,
 } from './styles';
 
 export default class Main extends Component {
@@ -98,6 +100,11 @@ export default class Main extends Component {
     navigation.navigate('User', { user });
   };
 
+  handleDelete = user => {
+    const { users } = this.state;
+    this.setState({ users: users.filter(u => u !== user) });
+  };
+
   render() {
     const { users, newUser, loading, error } = this.state;
 
@@ -128,6 +135,9 @@ export default class Main extends Component {
           keyExtractor={user => user.login}
           renderItem={({ item }) => (
             <User>
+              <DeleteUserButton onPress={() => this.handleDelete(item)}>
+                <Icon name="close" size={20} color="#333" />
+              </DeleteUserButton>
               <UserAvatar source={{ uri: item.avatar }} />
               <UserName>{item.name}</UserName>
               <UserBio>{item.bio}</UserBio>
