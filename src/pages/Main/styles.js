@@ -21,7 +21,7 @@ export const InputUser = styled.TextInput.attrs({
   background: #eee;
   border-radius: 20px;
   padding: 0 15px;
-  border: 1px solid #eee;
+  border: 1px solid ${props => (props.error ? '#DC172F' : '#ddd')};
 `;
 
 export const SubmitButton = styled(RectButton)`
@@ -72,7 +72,7 @@ export const UserBio = styled.Text.attrs({
 export const ProfileButton = styled(RectButton)`
   margin-top: 10px;
   align-self: stretch;
-  border-radius: 4px;
+  border-radius: 18px;
   background: #7159c1;
   justify-content: center;
   align-items: center;

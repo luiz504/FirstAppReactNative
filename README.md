@@ -6,7 +6,6 @@
 
 ----
 ## Main page
----
 - [x] A field to insert the GitHub user's login.
 - [x] A button to trigger an API Request and insert user's info into the List.
 - [x] Each list component should have, name, login, bio, avatar and a button for more details and access the second route.

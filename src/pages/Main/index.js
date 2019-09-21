@@ -36,6 +36,7 @@ export default class Main extends Component {
       newUser: '',
       users: [],
       loading: false,
+      error: null,
     };
   }
 
@@ -57,26 +58,38 @@ export default class Main extends Component {
   }
 
   handleAddUser = async () => {
-    const { users, newUser } = this.state;
+    try {
+      const { users, newUser } = this.state;
 
-    this.setState({ loading: true });
+      this.setState({ loading: true, error: false });
 
-    const res = await api.get(`/users/${newUser}`);
+      const res = await api.get(`/users/${newUser}`);
 
-    const selectedData = {
-      name: res.data.name,
-      login: res.data.login,
-      bio: res.data.bio,
-      avatar: res.data.avatar_url,
-    };
+      const selectedData = {
+        name: res.data.name,
+        login: res.data.login,
+        bio: res.data.bio,
+        avatar: res.data.avatar_url,
+      };
 
-    this.setState({
-      users: [...users, selectedData],
-      newUser: '',
-      loading: false,
-    });
+      const hasUser = users.find(user => user.login === newUser);
 
-    Keyboard.dismiss(); // close keyboard after submit
+      if (hasUser) throw new Error('User already listed');
+
+      if (newUser === '') throw new Error("Insert GitHub user's login");
+
+      this.setState({
+        users: [...users, selectedData],
+        newUser: '',
+        loading: false,
+      });
+
+      Keyboard.dismiss(); // close keyboard after submit
+    } catch (err) {
+      this.setState({ error: true });
+    } finally {
+      this.setState({ loading: false });
+    }
   };
 
   handleNavigate = user => {
@@ -86,7 +99,7 @@ export default class Main extends Component {
   };
 
   render() {
-    const { users, newUser, loading } = this.state;
+    const { users, newUser, loading, error } = this.state;
 
     return (
       <Container>
@@ -99,6 +112,7 @@ export default class Main extends Component {
             onChangeText={text => this.setState({ newUser: text })}
             returnKeyType="send"
             onSubmitEditing={this.handleAddUser}
+            error={error}
           />
           <SubmitButton loading={loading} onPress={this.handleAddUser}>
             {loading ? (
