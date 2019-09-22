@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { Browser } from './styles';
@@ -18,6 +19,7 @@ export default class Repository extends Component {
     super(props);
     this.state = {
       repoUrl: {},
+      loading: true,
     };
   }
 
@@ -31,9 +33,21 @@ export default class Repository extends Component {
     });
   };
 
-  render() {
-    const { repoUrl } = this.state;
+  hideSpinner = () => {
+    this.setState({ loading: false });
+  };
 
-    return <Browser source={{ uri: repoUrl.html_url }} />;
+  render() {
+    const { repoUrl, loading } = this.state;
+
+    return (
+      <>
+        <Browser
+          source={{ uri: repoUrl.html_url }}
+          onLoad={() => this.hideSpinner()}
+        />
+        {loading && <ActivityIndicator size={60} color="#7159c1" />}
+      </>
+    );
   }
 }

@@ -42,7 +42,6 @@ export default class Main extends Component {
     };
   }
 
-  // use async cause we need load the data to render
   async componentDidMount() {
     const users = await AsyncStorage.getItem('users');
     if (users) {
@@ -50,7 +49,6 @@ export default class Main extends Component {
     }
   }
 
-  // don't need be async
   componentDidUpdate(_, prevState) {
     const { users } = this.state;
 
@@ -86,9 +84,9 @@ export default class Main extends Component {
         loading: false,
       });
 
-      Keyboard.dismiss(); // close keyboard after submit
+      Keyboard.dismiss();
     } catch (err) {
-      this.setState({ error: true });
+      this.setState({ error: true, newUser: '' });
     } finally {
       this.setState({ loading: false });
     }
@@ -114,7 +112,7 @@ export default class Main extends Component {
           <InputUser
             autoCorrect={false}
             autoCapitalize="none"
-            placeholder="add User"
+            placeholder="Add GitHub user"
             value={newUser}
             onChangeText={text => this.setState({ newUser: text })}
             returnKeyType="send"

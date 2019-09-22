@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { RectButton } from 'react-native-gesture-handler';
+import { RectButton, BaseButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View`
   flex: 1;
@@ -50,12 +50,11 @@ export const UserAvatar = styled.Image`
   border-radius: 32px;
   background: #eee;
 `;
-export const DeleteUserButton = styled(RectButton)`
-  align-self: flex-end;
-  border-radius: 10px;
-
+export const DeleteUserButton = styled(BaseButton)`
   justify-content: center;
   align-items: center;
+  align-self: flex-end;
+  padding: 3px 3px;
 `;
 
 export const UserName = styled.Text`
