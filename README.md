@@ -1,9 +1,10 @@
 # Mobile App using React-Native Environment
 ### This app consumes GitHub API.
 * Search for GitHub users and creating a list with the user's basic info.
-* Click on 'VIEW PROFILE' to open a new page with all 'user' starred repositories.
+* Click on 'VIEW PROFILE' to open a new page with the user's starred repositories.
 * Click over any listed repository to open Its GitHub webpage.
 
+![GitList](./assets/app.webm)
 ----
 ## Main page
 - [x] A field to insert the GitHub user's login.
